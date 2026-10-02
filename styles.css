@@ -66,6 +66,7 @@ p{margin:0;max-width:62ch}
 
 /* ---------- background stars + scroll bar ---------- */
 
+/* stars are drawn by site.js on this canvas */
 .sky{position:fixed;inset:0;z-index:-1;width:100%;height:100%;pointer-events:none;
   background:
     radial-gradient(ellipse 80% 60% at 70% 0%,rgba(52,153,189,.13),transparent 70%),
@@ -78,7 +79,7 @@ p{margin:0;max-width:62ch}
 
 .top{position:fixed;top:0;left:0;right:0;z-index:30;padding-top:env(safe-area-inset-top,0px);view-transition-name:header;
   border-bottom:1px solid transparent;transition:transform .45s var(--ease),background .35s,border-color .35s}
-.top.scrolled{background:rgba(10,22,49,.86);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom-color:var(--rule)}
+.top.scrolled{background:rgba(10,22,49,.95);border-bottom-color:var(--rule)}
 .top.hide{transform:translateY(-100%)}
 .top-in{display:flex;align-items:center;gap:1rem;min-height:var(--head)}
 
@@ -152,8 +153,8 @@ h1 .r{color:var(--coral);font-weight:700;letter-spacing:.11em;animation-name:fro
 @keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
 
 /* scroll reveal: site.js adds .will-reveal only to elements below the fold */
-.will-reveal{opacity:0;transform:translateY(34px) scale(.985);filter:blur(6px)}
-.will-reveal.is-in{opacity:1;transform:none;filter:none;transition:opacity .9s var(--ease) var(--d,0ms),transform 1s var(--ease) var(--d,0ms),filter .9s var(--ease) var(--d,0ms)}
+.will-reveal{opacity:0;transform:translateY(34px) scale(.985)}
+.will-reveal.is-in{opacity:1;transform:none;transition:opacity .9s var(--ease) var(--d,0ms),transform 1s var(--ease) var(--d,0ms)}
 
 /* card tilt + light spot (desktop only, set by site.js) */
 .tilt{position:relative;transform-style:preserve-3d;transition:transform .5s var(--ease),box-shadow .5s var(--ease),border-color .3s}
@@ -330,6 +331,8 @@ h1 .r{color:var(--coral);font-weight:700;letter-spacing:.11em;animation-name:fro
 .drawing .f-outer{fill:var(--flare);opacity:.6}
 .drawing .f-inner{fill:var(--flame-core)}
 .drawing .flame{transform-box:fill-box;transform-origin:left center;animation:flick .14s ease-in-out infinite alternate}
+/* site.js adds .off when the drawing is off screen */
+.drawing.off .flame{animation-play-state:paused}
 @keyframes flick{from{transform:scaleX(1) scaleY(1)}to{transform:scaleX(.78) scaleY(.9)}}
 
 /* outline trace, then CG/CP markers and labels (site.js adds .run) */
@@ -400,6 +403,6 @@ h1 .r{color:var(--coral);font-weight:700;letter-spacing:.11em;animation-name:fro
   html{scroll-behavior:auto}
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;animation-delay:0s!important;transition-duration:.01ms!important}
   ::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}
-  .will-reveal{opacity:1;transform:none;filter:none}
+  .will-reveal{opacity:1;transform:none}
   .drawing .trace{display:none}
 }

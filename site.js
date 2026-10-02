@@ -37,53 +37,67 @@ var ENLLACOS = {
 
 
   // ---------- starfield ----------
+  // Canvas at 30 fps. Each star is a small pre-drawn image, so a frame is just ~100 copies.
   var sky = document.querySelector(".sky");
   if (sky && sky.getContext){
     var ctx = sky.getContext("2d");
-    var stars = [], shoot = null, W = 0, H = 0, last = 0, nextShoot = 4000;
+    var FPS = 30, STEP = 1000 / FPS;
+    var stars = [], W = 0, H = 0, last = 0, acc = 0, shoot = null, nextShoot = 4000;
+
+    // one glowing dot, drawn once per colour
+    var sprite = function(color){
+      var c = document.createElement("canvas"), s = 16;
+      c.width = c.height = s;
+      var g = c.getContext("2d");
+      var grad = g.createRadialGradient(s / 2, s / 2, 0, s / 2, s / 2, s / 2);
+      grad.addColorStop(0, color);
+      grad.addColorStop(.45, color);
+      grad.addColorStop(1, "rgba(0,0,0,0)");
+      g.fillStyle = grad;
+      g.fillRect(0, 0, s, s);
+      return c;
+    };
+    var white = sprite("#F1F3F6"), warm = sprite("#FFE3C4");
 
     var resize = function(){
-      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      var dpr = 1;   // stars are soft dots, full resolution is not needed
       W = sky.clientWidth; H = sky.clientHeight;
-      sky.width = W * dpr; sky.height = H * dpr;
+      sky.width = Math.round(W * dpr); sky.height = Math.round(H * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      var n = Math.round(Math.min(160, W * H / 9000));   // fewer stars on small screens
+      var n = Math.round(Math.min(130, W * H / 11000));   // fewer stars on small screens
       stars = [];
       for (var i = 0; i < n; i++){
+        var r = Math.random() * 1.3 + .4;
         stars.push({
-          x: Math.random() * W, y: Math.random() * H,
-          r: Math.random() * 1.3 + .25,        // size
-          a: Math.random() * .6 + .25,         // brightness
-          tw: Math.random() * 2 + .6,          // twinkle speed
+          x: Math.random() * W, y: Math.random() * H, r: r,
+          img: r > 1.45 ? warm : white,
+          a: Math.random() * .5 + .5,       // brightness
+          tw: Math.random() * 2 + .6,       // twinkle speed
           ph: Math.random() * 6.3,
-          v: Math.random() * .012 + .004       // drift speed
+          v: Math.random() * .01 + .004     // drift, px per ms
         });
       }
     };
 
-    var draw = function(t){
-      var dt = Math.min(50, t - last); last = t;
+    var render = function(t, dt){
       ctx.clearRect(0, 0, W, H);
       var sy = window.scrollY * .04;   // slight parallax on scroll
 
       for (var i = 0; i < stars.length; i++){
         var s = stars[i];
-        if (!reduce){
-          s.y -= s.v * dt;
-          if (s.y < -2){ s.y = H + 2; s.x = Math.random() * W; }
-        }
-        var a = reduce ? s.a : s.a * (.65 + .35 * Math.sin(t / 1000 * s.tw + s.ph));
+        s.y -= s.v * dt;
+        if (s.y < -4){ s.y = H + 4; s.x = Math.random() * W; }
         var y = ((s.y - sy * s.r) % H + H) % H;
-        ctx.globalAlpha = a;
-        ctx.fillStyle = s.r > 1.2 ? "#FFE3C4" : "#F1F3F6";
-        ctx.beginPath(); ctx.arc(s.x, y, s.r, 0, 6.283); ctx.fill();
+        ctx.globalAlpha = reduce ? s.a : s.a * (.6 + .4 * Math.sin(t / 1000 * s.tw + s.ph));
+        var d = s.r * 3;   // sprite has a soft edge, so draw it a bit bigger than the star
+        ctx.drawImage(s.img, s.x - d / 2, y - d / 2, d, d);
       }
 
       // shooting star every 6–13 s
       if (!reduce){
         nextShoot -= dt;
         if (!shoot && nextShoot <= 0){
-          shoot = {x: Math.random() * W * .7 + W * .2, y: Math.random() * H * .35, l: 0};
+          shoot = {x: Math.random() * W * .6 + W * .3, y: Math.random() * H * .35, l: 0};
           nextShoot = 6000 + Math.random() * 7000;
         }
         if (shoot){
@@ -98,14 +112,19 @@ var ENLLACOS = {
           if (shoot.l > 700) shoot = null;
         }
       }
-
       ctx.globalAlpha = 1;
-      if (!reduce) requestAnimationFrame(draw);
+    };
+
+    var loop = function(t){
+      var dt = Math.min(100, t - (last || t)); last = t;
+      acc += dt;
+      if (acc >= STEP){ render(t, acc); acc %= STEP; }   // draw at most 30 times per second
+      requestAnimationFrame(loop);
     };
 
     resize();
-    window.addEventListener("resize", function(){ resize(); if (reduce) draw(0); });
-    if (reduce) draw(0); else requestAnimationFrame(draw);
+    window.addEventListener("resize", function(){ resize(); if (reduce) render(0, 0); });
+    if (reduce) render(0, 0); else requestAnimationFrame(loop);
   }
 
 
@@ -189,10 +208,12 @@ var ENLLACOS = {
       svg.classList.add("run");
     };
     if ("IntersectionObserver" in window){
-      var ro = new IntersectionObserver(function(entries){
-        if (entries[0].isIntersecting){ play(); ro.disconnect(); }
-      }, {threshold: .5});
-      ro.observe(svg);
+      var played = false;
+      new IntersectionObserver(function(entries){
+        var on = entries[0].isIntersecting;
+        svg.classList.toggle("off", !on);   // pause the flame when not visible
+        if (on && !played && entries[0].intersectionRatio >= .5){ play(); played = true; }
+      }, {threshold: [0, .5]}).observe(svg);
     } else {
       play();
     }
