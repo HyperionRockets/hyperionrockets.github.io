@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hyperion Rockets</title>
+<meta name="description" content="Hyperion Rockets is a student association at EETAC (UPC) that designs, calculates and builds high-power rockets.">
+<link rel="icon" href="../logo.webp" type="image/webp">
+<link rel="alternate" hreflang="ca" href="https://hyperionrockets.github.io/">
+<link rel="alternate" hreflang="en" href="https://hyperionrockets.github.io/en/">
+
+<!-- link preview (WhatsApp, Instagram...). Change SITE address here if the domain changes -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Hyperion Rockets">
+<meta property="og:title" content="Hyperion Rockets">
+<meta property="og:description" content="Hyperion Rockets is a student association at EETAC (UPC) that designs, calculates and builds high-power rockets.">
+<meta property="og:image" content="https://hyperionrockets.github.io/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://hyperionrockets.github.io/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Martian+Mono:wght@400;500&family=Public+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../styles.css">
+<!-- visit counter (GoatCounter) -->
+<script data-goatcounter="https://hyperionrockets.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+
+<!-- background + scroll bar -->
+<canvas class="sky" aria-hidden="true"></canvas>
+<div class="progress" aria-hidden="true"></div>
+
+<!-- header -->
+<header class="top">
+  <div class="wrap top-in">
+    <a class="brand" href="index.html" aria-label="Hyperion Rockets, home">
+      <img src="../logo.webp" alt="" width="34" height="40">
+      <span>Hyperion Rockets</span>
+    </a>
+    <nav class="nav" aria-label="Pages">
+      <a href="rockets.html">Rockets</a>
+      <a href="get-involved.html">Get involved</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="lang" role="group" aria-label="Language">
+      <a href="../index.html" hreflang="ca" lang="ca">CA</a>
+      <a href="index.html" hreflang="en" lang="en" aria-current="true">EN</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- ===== hero ===== -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <h1><span>Hyperion</span><span class="r">Rockets</span></h1>
+        <p class="lede rise">We design, calculate and build high-power rockets in Castelldefels.</p>
+        <div class="actions rise">
+          <a class="btn" href="rockets.html">Our rockets <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+          <a class="btn ghost" href="get-involved.html">Join us</a>
+        </div>
+        <div class="partners rise">
+          <img class="upc" src="../upc.webp" alt="Universitat Politècnica de Catalunya · BarcelonaTech" width="504" height="111">
+          <span class="sep" aria-hidden="true"></span>
+          <img class="eetac" src="../eetac.webp" alt="EETAC" width="358" height="187">
+        </div>
+      </div>
+
+      <!-- logo with orbits -->
+      <div class="patch-wrap">
+        <div class="halo" aria-hidden="true"></div>
+        <svg class="orbit" viewBox="0 0 400 400" aria-hidden="true">
+          <g class="spin"><ellipse class="ring" cx="200" cy="200" rx="194" ry="72" transform="rotate(-28 200 200)"/></g>
+          <ellipse class="ring2" cx="200" cy="200" rx="176" ry="176"/>
+          <g transform="rotate(-28 200 200)">
+            <circle class="sat" r="6"><animateMotion dur="9s" repeatCount="indefinite" path="M6 200 A194 72 0 1 1 394 200 A194 72 0 1 1 6 200 Z"/></circle>
+          </g>
+          <circle class="sat2" r="4"><animateMotion dur="16s" repeatCount="indefinite" path="M200 24 A176 176 0 1 1 199.9 24 Z"/></circle>
+        </svg>
+        <div class="patch"><img src="../logo.webp" alt="Hyperion Rockets mission patch: a white and red rocket lifting off, with the words Hyperion Rockets, EETAC and BCN" width="618" height="720"></div>
+      </div>
+    </div>
+    <a class="cue" href="#discover">Discover<i></i></a>
+  </section>
+
+  <!-- ===== moving words ===== -->
+  <div class="marquee" aria-hidden="true"><div class="marquee-track"><span>Design<svg viewBox="0 0 10 10" aria-hidden="true"><path d="M5 0 L6 4 L10 5 L6 6 L5 10 L4 6 L0 5 L4 4 Z"/></svg>Calculation<svg viewBox="0 0 10 10" aria-hidden="true"><path d="M5 0 L6 4 L10 5 L6 6 L5 10 L4 6 L0 5 L4 4 Z"/></svg>Build<svg viewBox="0 0 10 10" aria-hidden="true"><path d="M5 0 L6 4 L10 5 L6 6 L5 10 L4 6 L0 5 L4 4 Z"/></svg>Testing<svg viewBox="0 0 10 10" aria-hidden="true"><path d="M5 0 L6 4 L10 5 L6 6 L5 10 L4 6 L0 5 L4 4 Z"/></svg>Flight<svg viewBox="0 0 10 10" aria-hidden="true"><path d="M5 0 L6 4 L10 5 L6 6 L5 10 L4 6 L0 5 L4 4 Z"/></svg></span><span>Design<svg viewBox="0 0 10 10" aria-hidden="true"><path d="M5 0 L6 4 L10 5 L6 6 L5 10 L4 6 L0 5 L4 4 Z"/></svg>Calculation<svg viewBox="0 0 10 10" aria-hidden="true"><path d="M5 0 L6 4 L10 5 L6 6 L5 10 L4 6 L0 5 L4 4 Z"/></svg>Build<svg viewBox="0 0 10 10" aria-hidden="true"><path d="M5 0 L6 4 L10 5 L6 6 L5 10 L4 6 L0 5 L4 4 Z"/></svg>Testing<svg viewBox="0 0 10 10" aria-hidden="true"><path d="M5 0 L6 4 L10 5 L6 6 L5 10 L4 6 L0 5 L4 4 Z"/></svg>Flight<svg viewBox="0 0 10 10" aria-hidden="true"><path d="M5 0 L6 4 L10 5 L6 6 L5 10 L4 6 L0 5 L4 4 Z"/></svg></span></div></div>
+
+  <!-- ===== links to the other pages ===== -->
+  <section class="section" id="discover">
+    <div class="wrap">
+      <nav class="doors" aria-label="Site sections" data-stagger>
+        <a class="door card tilt" href="rockets.html" data-reveal>
+          <span class="ico"><svg viewBox="0 0 28 28" aria-hidden="true"><g class="body"><path d="M14 2.5c3.2 2.7 4.7 6.6 4.7 10.9v6.8H9.3v-6.8c0-4.3 1.5-8.2 4.7-10.9Z"/><path d="M9.3 14.8 6 18.4v4l3.3-2.2M18.7 14.8l3.3 3.6v4l-3.3-2.2"/><circle cx="14" cy="11" r="2"/></g><path class="fire" d="M12 22.5v3M14 22.5v4.5M16 22.5v3"/></svg></span>
+          <h2>Rockets</h2>
+          <p>The rockets we design and build.</p>
+          <span class="go">See them <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
+        </a>
+
+        <a class="door card tilt" href="get-involved.html" data-reveal>
+          <span class="ico"><svg viewBox="0 0 28 28" aria-hidden="true"><path class="star" d="M14 3 16 12 25 14 16 16 14 25 12 16 3 14 12 12Z"/></svg></span>
+          <h2>Get involved</h2>
+          <p>Sponsor the project or join the team.</p>
+          <span class="go">How to help <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
+        </a>
+
+        <a class="door card tilt" href="contact.html" data-reveal>
+          <span class="ico"><svg viewBox="0 0 28 28" aria-hidden="true"><rect x="3.5" y="7" width="21" height="15" rx="2.5"/><path class="flap" d="m4.5 8.5 9.5 7 9.5-7"/></svg></span>
+          <h2>Contact</h2>
+          <p>Email, Instagram and where to find us.</p>
+          <span class="go">Write to us <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
+        </a>
+      </nav>
+    </div>
+  </section>
+
+  <!-- ===== sponsors ===== -->
+  <section class="section sponsors" aria-labelledby="sp-title">
+    <div class="wrap">
+      <div class="sp-head" data-reveal>
+        <h2 id="sp-title">Sponsors</h2>
+        <p class="muted">The companies and organisations helping us get our rockets off the ground.</p>
+      </div>
+      <div class="sponsor-grid" data-stagger>
+        <!-- Add one line per sponsor, above the dashed box:
+        <a class="sponsor" href="https://sponsor-website.com" target="_blank" rel="noopener" data-reveal><img src="../patrocinadors/nom.png" alt="Company name"></a>
+        -->
+        <a class="sponsor slot" href="get-involved.html" data-reveal>
+          <span class="plus" aria-hidden="true"></span>
+          <strong>Your logo could be here</strong>
+          <span class="go">Become a sponsor <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script src="../site.js"></script>
+</body>
+</html>
