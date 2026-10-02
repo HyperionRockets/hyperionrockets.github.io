@@ -1,0 +1,228 @@
+/* Hyperion Rockets — site script */
+
+/* ===== Links: edit these two lines =====
+   formulari: Google Form URL for "Vull participar". Empty = goes to the contact page.
+   dossier:   PDF file, e.g. "dossier.pdf". Empty = button shows "Disponible aviat". */
+var ENLLACOS = {
+  formulari: "",
+  dossier: ""
+};
+
+
+(function(){
+  var EN = (document.documentElement.lang || "").indexOf("en") === 0;
+  var base = EN ? "../" : "";   // English pages live one folder down
+  var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var mouse = matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+
+  // ---------- form + dossier links ----------
+  if (ENLLACOS.formulari){
+    document.querySelectorAll('[data-link="form"]').forEach(function(a){
+      a.href = ENLLACOS.formulari;
+      a.target = "_blank";
+      a.rel = "noopener";
+    });
+  }
+  if (ENLLACOS.dossier){
+    document.querySelectorAll('[data-link="dossier"]').forEach(function(a){
+      a.href = /^https?:/.test(ENLLACOS.dossier) ? ENLLACOS.dossier : base + ENLLACOS.dossier;
+      a.target = "_blank";
+      a.rel = "noopener";
+      a.classList.remove("is-pending");
+      a.removeAttribute("aria-disabled");
+      a.removeAttribute("role");
+    });
+  }
+
+
+  // ---------- starfield ----------
+  var sky = document.querySelector(".sky");
+  if (sky && sky.getContext){
+    var ctx = sky.getContext("2d");
+    var stars = [], shoot = null, W = 0, H = 0, last = 0, nextShoot = 4000;
+
+    var resize = function(){
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      W = sky.clientWidth; H = sky.clientHeight;
+      sky.width = W * dpr; sky.height = H * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      var n = Math.round(Math.min(160, W * H / 9000));   // fewer stars on small screens
+      stars = [];
+      for (var i = 0; i < n; i++){
+        stars.push({
+          x: Math.random() * W, y: Math.random() * H,
+          r: Math.random() * 1.3 + .25,        // size
+          a: Math.random() * .6 + .25,         // brightness
+          tw: Math.random() * 2 + .6,          // twinkle speed
+          ph: Math.random() * 6.3,
+          v: Math.random() * .012 + .004       // drift speed
+        });
+      }
+    };
+
+    var draw = function(t){
+      var dt = Math.min(50, t - last); last = t;
+      ctx.clearRect(0, 0, W, H);
+      var sy = window.scrollY * .04;   // slight parallax on scroll
+
+      for (var i = 0; i < stars.length; i++){
+        var s = stars[i];
+        if (!reduce){
+          s.y -= s.v * dt;
+          if (s.y < -2){ s.y = H + 2; s.x = Math.random() * W; }
+        }
+        var a = reduce ? s.a : s.a * (.65 + .35 * Math.sin(t / 1000 * s.tw + s.ph));
+        var y = ((s.y - sy * s.r) % H + H) % H;
+        ctx.globalAlpha = a;
+        ctx.fillStyle = s.r > 1.2 ? "#FFE3C4" : "#F1F3F6";
+        ctx.beginPath(); ctx.arc(s.x, y, s.r, 0, 6.283); ctx.fill();
+      }
+
+      // shooting star every 6–13 s
+      if (!reduce){
+        nextShoot -= dt;
+        if (!shoot && nextShoot <= 0){
+          shoot = {x: Math.random() * W * .7 + W * .2, y: Math.random() * H * .35, l: 0};
+          nextShoot = 6000 + Math.random() * 7000;
+        }
+        if (shoot){
+          shoot.l += dt * .9;
+          var len = Math.min(140, shoot.l), hx = shoot.x - shoot.l, hy = shoot.y + shoot.l * .45;
+          var g = ctx.createLinearGradient(hx, hy, hx + len, hy - len * .45);
+          g.addColorStop(0, "rgba(255,227,196,.9)");
+          g.addColorStop(1, "rgba(255,227,196,0)");
+          ctx.globalAlpha = Math.max(0, 1 - shoot.l / 700);
+          ctx.strokeStyle = g; ctx.lineWidth = 1.6;
+          ctx.beginPath(); ctx.moveTo(hx, hy); ctx.lineTo(hx + len, hy - len * .45); ctx.stroke();
+          if (shoot.l > 700) shoot = null;
+        }
+      }
+
+      ctx.globalAlpha = 1;
+      if (!reduce) requestAnimationFrame(draw);
+    };
+
+    resize();
+    window.addEventListener("resize", function(){ resize(); if (reduce) draw(0); });
+    if (reduce) draw(0); else requestAnimationFrame(draw);
+  }
+
+
+  // ---------- header + progress bar ----------
+  var top = document.querySelector(".top");
+  var bar = document.querySelector(".progress");
+  var lastY = window.scrollY;
+
+  var onScroll = function(){
+    var y = window.scrollY;
+    if (top){
+      top.classList.toggle("scrolled", y > 12);
+      if (y > 240 && y > lastY + 2) top.classList.add("hide");   // hide going down
+      if (y < lastY - 2) top.classList.remove("hide");           // show going up
+    }
+    if (bar){
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.transform = "scaleX(" + (max > 0 ? y / max : 0) + ")";
+    }
+    lastY = y;
+  };
+  window.addEventListener("scroll", onScroll, {passive: true});
+  onScroll();
+
+
+  // ---------- scroll reveal ----------
+  // Only elements below the fold get hidden, so nothing stays invisible without JS.
+  if (!reduce && "IntersectionObserver" in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting){ e.target.classList.add("is-in"); io.unobserve(e.target); }
+      });
+    }, {threshold: .12, rootMargin: "0px 0px -6% 0px"});
+
+    // stagger children of [data-stagger]
+    document.querySelectorAll("[data-stagger]").forEach(function(group){
+      group.querySelectorAll("[data-reveal]").forEach(function(el, i){
+        el.style.setProperty("--d", (i * 110) + "ms");
+      });
+    });
+
+    document.querySelectorAll("[data-reveal]").forEach(function(el){
+      if (el.getBoundingClientRect().top > window.innerHeight * .9){
+        el.classList.add("will-reveal");
+        io.observe(el);
+      }
+    });
+  }
+
+
+  // ---------- card tilt ----------
+  if (!reduce && mouse){
+    document.querySelectorAll(".tilt").forEach(function(el){
+      el.addEventListener("pointermove", function(ev){
+        var r = el.getBoundingClientRect();
+        var px = (ev.clientX - r.left) / r.width, py = (ev.clientY - r.top) / r.height;
+        el.style.setProperty("--mx", (px * 100) + "%");
+        el.style.setProperty("--my", (py * 100) + "%");
+        el.style.transform = "perspective(900px) rotateX(" + ((.5 - py) * 7) + "deg) rotateY(" + ((px - .5) * 9) + "deg) translateY(-4px)";
+      });
+      el.addEventListener("pointerleave", function(){ el.style.transform = ""; });
+    });
+  }
+
+
+  // ---------- home logo follows the mouse ----------
+  var patch = document.querySelector(".patch");
+  if (patch && !reduce && mouse){
+    window.addEventListener("pointermove", function(ev){
+      var x = ev.clientX / window.innerWidth - .5, y = ev.clientY / window.innerHeight - .5;
+      patch.style.transform = "translate(" + (x * 18) + "px," + (y * 14) + "px) rotate(" + (x * 4) + "deg)";
+    });
+  }
+
+
+  // ---------- rocket drawings: trace when visible, again on click ----------
+  document.querySelectorAll(".drawing").forEach(function(svg){
+    var play = function(){
+      svg.classList.remove("run");
+      void svg.getBoundingClientRect();   // restart the animation
+      svg.classList.add("run");
+    };
+    if ("IntersectionObserver" in window){
+      var ro = new IntersectionObserver(function(entries){
+        if (entries[0].isIntersecting){ play(); ro.disconnect(); }
+      }, {threshold: .5});
+      ro.observe(svg);
+    } else {
+      play();
+    }
+    svg.addEventListener("click", play);
+  });
+
+
+  // ---------- copy e-mail ----------
+  var btn = document.getElementById("copy-mail");
+  var mail = document.getElementById("mail");
+  if (btn && mail){
+    var label = btn.querySelector(".t");
+    var txt = EN ? {copy: "Copy", done: "Copied", sel: "Selected"} : {copy: "Copia", done: "Copiat", sel: "Seleccionat"};
+
+    var selectText = function(){
+      var r = document.createRange(); r.selectNodeContents(mail);
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      label.textContent = txt.sel;
+    };
+
+    btn.addEventListener("click", function(){
+      try {
+        navigator.clipboard.writeText(mail.textContent.trim()).then(function(){
+          label.textContent = txt.done;
+          btn.classList.add("ok");
+          setTimeout(function(){ label.textContent = txt.copy; btn.classList.remove("ok"); }, 2000);
+        }, selectText);
+      } catch (e){
+        selectText();
+      }
+    });
+  }
+})();
