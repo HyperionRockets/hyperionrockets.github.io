@@ -6,18 +6,19 @@
 <title>Hyperion Rockets</title>
 <meta name="description" content="Hyperion Rockets és una associació d'estudiants de l'EETAC (UPC) que dissenya, calcula i construeix coets d'alta potència.">
 <link rel="icon" href="logo.webp" type="image/webp">
-<link rel="alternate" hreflang="ca" href="https://hyperionrockets.github.io/">
-<link rel="alternate" hreflang="en" href="https://hyperionrockets.github.io/en/">
+<link rel="alternate" hreflang="ca" href="https://hyperionrockets.upc.edu/">
+<link rel="alternate" hreflang="es" href="https://hyperionrockets.upc.edu/es/">
+<link rel="alternate" hreflang="en" href="https://hyperionrockets.upc.edu/en/">
 
-<!-- link preview (WhatsApp, Instagram...). Change SITE address here if the domain changes -->
+<!-- link preview (WhatsApp, Instagram...). Change the address here if the domain changes -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Hyperion Rockets">
 <meta property="og:title" content="Hyperion Rockets">
 <meta property="og:description" content="Hyperion Rockets és una associació d'estudiants de l'EETAC (UPC) que dissenya, calcula i construeix coets d'alta potència.">
-<meta property="og:image" content="https://hyperionrockets.github.io/og-image.png">
+<meta property="og:image" content="https://hyperionrockets.upc.edu/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:url" content="https://hyperionrockets.github.io/">
+<meta property="og:url" content="https://hyperionrockets.upc.edu/">
 <meta property="og:locale" content="ca_ES">
 <meta name="twitter:card" content="summary_large_image">
 
@@ -41,14 +42,19 @@
       <img src="logo.webp" alt="" width="34" height="40">
       <span>Hyperion Rockets</span>
     </a>
-    <nav class="nav" aria-label="Pàgines">
-      <a href="coets.html">Coets</a>
-      <a href="collabora.html">Col·labora</a>
-      <a href="contacte.html">Contacte</a>
-    </nav>
-    <div class="lang" role="group" aria-label="Idioma">
-      <a href="index.html" hreflang="ca" lang="ca" aria-current="true">CA</a>
-      <a href="en/index.html" hreflang="en" lang="en">EN</a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu"><span class="bars" aria-hidden="true"></span>Menú</button>
+    <div class="menu" id="menu">
+      <nav class="nav" aria-label="Pàgines">
+        <a href="qui-som.html">Qui som</a>
+        <a href="coets.html">Coets</a>
+        <a href="collabora.html">Col·labora</a>
+        <a href="contacte.html">Contacte</a>
+      </nav>
+      <div class="lang" role="group" aria-label="Idioma">
+        <a href="index.html" hreflang="ca" lang="ca" aria-current="true">CA</a>
+        <a href="es/index.html" hreflang="es" lang="es">ES</a>
+        <a href="en/index.html" hreflang="en" lang="en">EN</a>
+      </div>
     </div>
   </div>
 </header>
@@ -96,6 +102,13 @@
   <section class="section" id="descobreix">
     <div class="wrap">
       <nav class="doors" aria-label="Seccions de la web" data-stagger>
+        <a class="door card tilt" href="qui-som.html" data-reveal>
+          <span class="ico"><svg viewBox="0 0 28 28" aria-hidden="true"><g class="who"><circle cx="11" cy="9.5" r="3.6"/><path d="M4 22c0-4 3.1-6.6 7-6.6s7 2.6 7 6.6"/></g><g class="who2"><circle cx="19.5" cy="10.5" r="2.9"/><path d="M18.6 15.6c3.3.1 5.6 2.4 5.6 5.7"/></g></svg></span>
+          <h2>Qui som</h2>
+          <p>Què és Hyperion Rockets i què volem fer.</p>
+          <span class="go">Coneix-nos <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
+        </a>
+
         <a class="door card tilt" href="coets.html" data-reveal>
           <span class="ico"><svg viewBox="0 0 28 28" aria-hidden="true"><g class="body"><path d="M14 2.5c3.2 2.7 4.7 6.6 4.7 10.9v6.8H9.3v-6.8c0-4.3 1.5-8.2 4.7-10.9Z"/><path d="M9.3 14.8 6 18.4v4l3.3-2.2M18.7 14.8l3.3 3.6v4l-3.3-2.2"/><circle cx="14" cy="11" r="2"/></g><path class="fire" d="M12 22.5v3M14 22.5v4.5M16 22.5v3"/></svg></span>
           <h2>Coets</h2>

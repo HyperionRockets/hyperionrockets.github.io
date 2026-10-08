@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Qui som · Hyperion Rockets</title>
+<meta name="description" content="Hyperion Rockets és una associació d'estudiants de l'EETAC (UPC). Qui som i què volem fer.">
+<link rel="icon" href="logo.webp" type="image/webp">
+<link rel="alternate" hreflang="ca" href="https://hyperionrockets.upc.edu/qui-som.html">
+<link rel="alternate" hreflang="es" href="https://hyperionrockets.upc.edu/es/quienes-somos.html">
+<link rel="alternate" hreflang="en" href="https://hyperionrockets.upc.edu/en/about.html">
+
+<!-- link preview (WhatsApp, Instagram...). Change the address here if the domain changes -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Hyperion Rockets">
+<meta property="og:title" content="Qui som · Hyperion Rockets">
+<meta property="og:description" content="Hyperion Rockets és una associació d'estudiants de l'EETAC (UPC). Qui som i què volem fer.">
+<meta property="og:image" content="https://hyperionrockets.upc.edu/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://hyperionrockets.upc.edu/qui-som.html">
+<meta property="og:locale" content="ca_ES">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Martian+Mono:wght@400;500&family=Public+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="styles.css">
+<!-- visit counter (GoatCounter). Full https:// address: a bare "//" breaks local file:// testing -->
+<script data-goatcounter="https://hyperionrockets.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</head>
+<body>
+
+<!-- background + scroll bar -->
+<canvas class="sky" aria-hidden="true"></canvas>
+<div class="progress" aria-hidden="true"></div>
+
+<!-- header -->
+<header class="top">
+  <div class="wrap top-in">
+    <a class="brand" href="index.html" aria-label="Hyperion Rockets, portada">
+      <img src="logo.webp" alt="" width="34" height="40">
+      <span>Hyperion Rockets</span>
+    </a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu"><span class="bars" aria-hidden="true"></span>Menú</button>
+    <div class="menu" id="menu">
+      <nav class="nav" aria-label="Pàgines">
+        <a href="qui-som.html" aria-current="page">Qui som</a>
+        <a href="coets.html">Coets</a>
+        <a href="collabora.html">Col·labora</a>
+        <a href="contacte.html">Contacte</a>
+      </nav>
+      <div class="lang" role="group" aria-label="Idioma">
+        <a href="qui-som.html" hreflang="ca" lang="ca" aria-current="true">CA</a>
+        <a href="es/quienes-somos.html" hreflang="es" lang="es">ES</a>
+        <a href="en/about.html" hreflang="en" lang="en">EN</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="page-head">
+    <div class="wrap">
+      <h1><span>Qui som</span></h1>
+      <p class="lede rise">Som una associació d'estudiants de l'EETAC (UPC) que dissenya, calcula i construeix coets d'alta potència.</p>
+    </div>
+  </div>
+
+  <div class="page-body">
+    <div class="wrap about">
+      <section class="about-row" data-reveal>
+        <h2>Què és Hyperion Rockets</h2>
+        <div class="about-text"><p>Hyperion Rockets és una associació d'estudiants sense ànim de lucre de l'Escola d'Enginyeria de Telecomunicació i Aeroespacial de Castelldefels (EETAC), de la Universitat Politècnica de Catalunya.</p><p>Ens hem ajuntat per dissenyar, calcular, construir i llançar coets experimentals, i per aprendre enginyeria fent-la.</p></div>
+      </section>
+
+      <section class="about-row" data-reveal>
+        <h2>Què volem fer</h2>
+        <div class="about-text"><ul class="list">
+            <li><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M5 0 L6 4 L10 5 L6 6 L5 10 L4 6 L0 5 L4 4 Z"/></svg>Fer el primer vol d'alta potència de l'associació, amb el suport de SpainRocketry, al camp de llançament d'Alcolea de Cinca.</li>
+            <li><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M5 0 L6 4 L10 5 L6 6 L5 10 L4 6 L0 5 L4 4 Z"/></svg>Anar pujant de nivell, coet a coet, cap a projectes cada vegada més complexos.</li>
+            <li><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M5 0 L6 4 L10 5 L6 6 L5 10 L4 6 L0 5 L4 4 Z"/></svg>Que cada membre en surti amb experiència real d'enginyeria: disseny, càlcul, fabricació, assaigs i documentació.</li>
+          </ul></div>
+      </section>
+
+      <!-- Team: later, add a grid of photos here, e.g.
+      <section class="team" data-reveal> ... </section>
+      -->
+    </div>
+  </div>
+</main>
+
+<script src="site.js"></script>
+</body>
+</html>

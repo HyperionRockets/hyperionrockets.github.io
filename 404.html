@@ -28,6 +28,7 @@ main{position:relative;text-align:center;max-width:640px}
 h1{font-family:"Archivo","Arial Narrow",sans-serif;font-stretch:118%;font-weight:750;text-transform:uppercase;letter-spacing:.04em;font-size:clamp(1.3rem,4vw,1.9rem);margin:1.2rem 0 .6rem;text-wrap:balance;animation:in .8s .3s var(--ease) both}
 p{margin:0 auto;max-width:46ch;color:var(--hull);line-height:1.6;animation:in .8s .4s var(--ease) both}
 p.en{color:var(--mute);margin-top:.4rem;font-size:.95rem;animation-delay:.5s}
+p.en + p.en{margin-top:.2rem}
 .actions{display:flex;flex-wrap:wrap;justify-content:center;gap:.8rem;margin-top:2rem;animation:in .8s .6s var(--ease) both}
 .btn{display:inline-flex;align-items:center;gap:.55rem;text-decoration:none;font-family:"Archivo","Arial Narrow",sans-serif;font-stretch:112%;font-weight:700;font-size:.86rem;letter-spacing:.1em;text-transform:uppercase;padding:.9rem 1.35rem;border-radius:999px;color:#fff;background:var(--btn);transition:transform .35s var(--ease),background .25s,box-shadow .35s var(--ease)}
 .btn:hover{background:var(--btn-hi);transform:translateY(-3px);box-shadow:0 14px 28px -12px rgba(216,74,54,.7)}
@@ -38,8 +39,6 @@ p.en{color:var(--mute);margin-top:.4rem;font-size:.95rem;animation-delay:.5s}
 ::selection{background:var(--coral);color:#fff}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
-<!-- visit counter (GoatCounter). Full https:// address: a bare "//" breaks local file:// testing -->
-<script data-goatcounter="https://hyperionrockets.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </head>
 <body>
 <div class="stars" aria-hidden="true"></div>
@@ -60,18 +59,23 @@ p.en{color:var(--mute);margin-top:.4rem;font-size:.95rem;animation-delay:.5s}
   </div>
   <h1>Aquesta pàgina s'ha perdut en òrbita</h1>
   <p>L'adreça no existeix o ha canviat. Torna a l'inici i continua des d'allà.</p>
+  <p class="en" lang="es">Esta página se ha perdido en órbita. Vuelve al inicio.</p>
   <p class="en" lang="en">This page drifted off into orbit. Head back to the home page.</p>
   <div class="actions">
     <a class="btn" id="home-ca" href="/"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M14 8H3M7 4 3 8l4 4"/></svg>Torna a l'inici</a>
-    <a class="btn ghost" id="home-en" href="/en/" lang="en">English home</a>
+    <a class="btn ghost" id="home-es" href="/es/" lang="es">Español</a>
+    <a class="btn ghost" id="home-en" href="/en/" lang="en">English</a>
   </div>
 </main>
 <script>
 /* Finds the home page wherever the site lives:
    local files, the domain root, or a sub-folder like /repo-name/ on GitHub Pages. */
 (function(){
-  var ca = document.getElementById("home-ca"), en = document.getElementById("home-en");
-  var set = function(root){ ca.href = root + "index.html"; en.href = root + "en/index.html"; };
+  var set = function(root){
+    document.getElementById("home-ca").href = root + "index.html";
+    document.getElementById("home-es").href = root + "es/index.html";
+    document.getElementById("home-en").href = root + "en/index.html";
+  };
 
   if (location.protocol === "file:"){
     set(new URL(".", location.href).href);   // 404.html sits next to index.html

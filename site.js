@@ -3,17 +3,18 @@
 /* ===== Links: edit these lines =====
    formulari:  Google Form URL for "Vull participar". Empty = goes to the contact page.
    dossier:    Catalan PDF. Empty = button shows "Disponible aviat".
-   dossier_en: English PDF. Empty = English pages use the Catalan one. */
+   dossier_es / dossier_en: Spanish and English PDFs. Empty = those pages use the Catalan one. */
 var ENLLACOS = {
   formulari: "",
   dossier: "dossier.pdf",
+  dossier_es: "dossier-es.pdf",
   dossier_en: "dossier-en.pdf"
 };
 
 
 (function(){
-  var EN = (document.documentElement.lang || "").indexOf("en") === 0;
-  var base = EN ? "../" : "";   // English pages live one folder down
+  var lang = (document.documentElement.lang || "ca").slice(0, 2);   // ca, es or en
+  var base = lang === "ca" ? "" : "../";   // es/ and en/ pages live one folder down
   var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
   var mouse = matchMedia("(hover: hover) and (pointer: fine)").matches;
 
@@ -26,7 +27,7 @@ var ENLLACOS = {
       a.rel = "noopener";
     });
   }
-  var dossier = (EN && ENLLACOS.dossier_en) || ENLLACOS.dossier;
+  var dossier = ENLLACOS["dossier_" + lang] || ENLLACOS.dossier;
   if (dossier){
     document.querySelectorAll('[data-link="dossier"]').forEach(function(a){
       a.href = /^https?:/.test(dossier) ? dossier : base + dossier;
@@ -140,7 +141,7 @@ var ENLLACOS = {
     var y = window.scrollY;
     if (top){
       top.classList.toggle("scrolled", y > 12);
-      if (y > 240 && y > lastY + 2) top.classList.add("hide");   // hide going down
+      if (y > 240 && y > lastY + 2 && !top.classList.contains("open")) top.classList.add("hide");   // hide going down
       if (y < lastY - 2) top.classList.remove("hide");           // show going up
     }
     if (bar){
@@ -151,6 +152,26 @@ var ENLLACOS = {
   };
   window.addEventListener("scroll", onScroll, {passive: true});
   onScroll();
+
+
+  // ---------- phone menu ----------
+  var menuBtn = document.querySelector(".menu-btn");
+  if (top && menuBtn){
+    var setMenu = function(open){
+      top.classList.toggle("open", open);
+      menuBtn.setAttribute("aria-expanded", open);
+    };
+    menuBtn.addEventListener("click", function(){ setMenu(!top.classList.contains("open")); });
+    document.querySelectorAll(".menu a").forEach(function(a){
+      a.addEventListener("click", function(){ setMenu(false); });
+    });
+    document.addEventListener("keydown", function(e){
+      if (e.key === "Escape" && top.classList.contains("open")){ setMenu(false); menuBtn.focus(); }
+    });
+    document.addEventListener("click", function(e){
+      if (top.classList.contains("open") && !top.contains(e.target)) setMenu(false);
+    });
+  }
 
 
   // ---------- scroll reveal ----------
@@ -229,7 +250,11 @@ var ENLLACOS = {
   var mail = document.getElementById("mail");
   if (btn && mail){
     var label = btn.querySelector(".t");
-    var txt = EN ? {copy: "Copy", done: "Copied", sel: "Selected"} : {copy: "Copia", done: "Copiat", sel: "Seleccionat"};
+    var txt = {
+      ca: {copy: "Copia", done: "Copiat", sel: "Seleccionat"},
+      es: {copy: "Copiar", done: "Copiado", sel: "Seleccionado"},
+      en: {copy: "Copy", done: "Copied", sel: "Selected"}
+    }[lang] || {copy: "Copia", done: "Copiat", sel: "Seleccionat"};
 
     var selectText = function(){
       var r = document.createRange(); r.selectNodeContents(mail);
