@@ -1,11 +1,13 @@
 /* Hyperion Rockets — site script */
 
-/* ===== Links: edit these two lines =====
-   formulari: Google Form URL for "Vull participar". Empty = goes to the contact page.
-   dossier:   PDF file, e.g. "dossier.pdf". Empty = button shows "Disponible aviat". */
+/* ===== Links: edit these lines =====
+   formulari:  Google Form URL for "Vull participar". Empty = goes to the contact page.
+   dossier:    Catalan PDF. Empty = button shows "Disponible aviat".
+   dossier_en: English PDF. Empty = English pages use the Catalan one. */
 var ENLLACOS = {
   formulari: "",
-  dossier: ""
+  dossier: "dossier.pdf",
+  dossier_en: "dossier-en.pdf"
 };
 
 
@@ -24,9 +26,10 @@ var ENLLACOS = {
       a.rel = "noopener";
     });
   }
-  if (ENLLACOS.dossier){
+  var dossier = (EN && ENLLACOS.dossier_en) || ENLLACOS.dossier;
+  if (dossier){
     document.querySelectorAll('[data-link="dossier"]').forEach(function(a){
-      a.href = /^https?:/.test(ENLLACOS.dossier) ? ENLLACOS.dossier : base + ENLLACOS.dossier;
+      a.href = /^https?:/.test(dossier) ? dossier : base + dossier;
       a.target = "_blank";
       a.rel = "noopener";
       a.classList.remove("is-pending");
