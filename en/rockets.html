@@ -75,60 +75,62 @@
         <div class="rocket-info">
           <div>
             <h2>Helios</h2>
-            <p>Our first high-power rocket. It is 1.16 metres long and 10 centimetres in diameter, and will fly on a class H motor. We are designing and building it ourselves, part by part.</p>
+            <p>Our first high-power rocket. It is 1.15 metres long and 7.9 centimetres (3 inches) in diameter, and will fly on a class H motor. We are designing and building it ourselves, part by part.</p>
           </div>
-          <span class="chip">H motor</span>
+          <div class="rocket-side">
+            <span class="chip">H motor</span>
+            <a class="btn ghost small" href="helios-3d.html"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5 14 5v6l-6 3.5L2 11V5Z"/><path d="M2 5l6 3.5L14 5M8 8.5v6"/></svg>View in 3D</a>
+          </div>
         </div>
         <figure class="plan">
           <div class="plan-scroll">
-            <svg class="drawing helios-d" viewBox="-30 -170 1330 290" role="img" aria-labelledby="helios-title">
+            <svg class="drawing helios-d" viewBox="-30 -160 1330 270" role="img" aria-labelledby="helios-title">
               <title id="helios-title">Side view of Helios, with the nose cone and fins in red, the body in light grey, and the positions of the centre of gravity and centre of pressure</title>
               <defs>
                 <!-- outline used by the trace animation -->
                 <g id="helios-outline">
-                  <path pathLength="1" d="M0 0 C90 -38 190 -50.8 300 -50.8 L300 50.8 C190 50.8 90 38 0 0 Z"/>
-                  <rect pathLength="1" x="300" y="-50.8" width="864" height="101.6"/>
-                  <path pathLength="1" d="M964 -50.8 L1034 -150.8 L1164 -150.8 L1164 -50.8"/>
-                  <path pathLength="1" d="M964 50.8 L1034 100.8 L1164 100.8 L1164 50.8"/>
+                  <path pathLength="1" d="M0 0 C86 -29.4 181 -39.37 285.75 -39.37 L285.75 39.37 C181 39.37 86 29.4 0 0 Z"/>
+                  <rect pathLength="1" x="285.75" y="-39.37" width="864" height="78.74"/>
+                  <path pathLength="1" d="M984.75 -39.37 L1093.75 -139.37 L1163.75 -139.37 L1144.75 -39.37"/>
+                  <path pathLength="1" d="M984.75 39.37 L1093.75 89.37 L1163.75 89.37 L1144.75 39.37"/>
                 </g>
               </defs>
 
               <!-- exhaust -->
               <g class="flame">
-                <path class="f-outer" d="M1166 -14 C1198 -14 1238 -6 1290 0 C1238 6 1198 14 1166 14 Z"/>
-                <path class="f-inner" d="M1166 -7 C1186 -7 1212 -3 1238 0 C1212 3 1186 7 1166 7 Z"/>
+                <path class="f-outer" d="M1160 -12 C1192 -12 1236 -5 1290 0 C1236 5 1192 12 1160 12 Z"/>
+                <path class="f-inner" d="M1160 -6 C1180 -6 1208 -3 1236 0 C1208 3 1180 6 1160 6 Z"/>
               </g>
 
               <!-- body, nose, fins -->
-              <path class="red" d="M964 50.8 L1034 100.8 L1164 100.8 L1164 50.8 Z"/>
-              <rect class="hull" x="300" y="-50.8" width="864" height="101.6"/>
-              <rect class="shade" x="301.5" y="22" width="861" height="27.3"/>
-              <line class="seam" x1="650" y1="-50.8" x2="650" y2="50.8"/>
-              <path class="red" d="M0 0 C90 -38 190 -50.8 300 -50.8 L300 50.8 C190 50.8 90 38 0 0 Z"/>
-              <path class="red" d="M964 -50.8 L1034 -150.8 L1164 -150.8 L1164 -50.8 Z"/>
+              <path class="red" d="M984.75 39.37 L1093.75 89.37 L1163.75 89.37 L1144.75 39.37 Z"/>
+              <rect class="hull" x="285.75" y="-39.37" width="864" height="78.74"/>
+              <rect class="shade" x="287" y="17" width="861" height="21"/>
+              <path class="red" d="M0 0 C86 -29.4 181 -39.37 285.75 -39.37 L285.75 39.37 C181 39.37 86 29.4 0 0 Z"/>
+              <path class="red" d="M984.75 -39.37 L1093.75 -139.37 L1163.75 -139.37 L1144.75 -39.37 Z"/>
 
-              <!-- inside parts (dashed) -->
-              <rect class="hid" x="300" y="-46" width="50" height="92"/>
-              <rect class="hid" x="590" y="-46" width="160" height="92"/>
-              <line class="bulk" x1="750" y1="-46" x2="750" y2="46"/>
-              <rect class="hid" x="795" y="-34" width="150" height="68" rx="22"/>
-              <rect class="hid" x="954" y="-15.5" width="210" height="31"/>
-              <line class="hid" x1="970" y1="-46" x2="970" y2="-15.5"/>
-              <line class="hid" x1="970" y1="15.5" x2="970" y2="46"/>
-              <line class="hid" x1="1100" y1="-46" x2="1100" y2="-15.5"/>
-              <line class="hid" x1="1100" y1="15.5" x2="1100" y2="46"/>
+              <!-- inside parts (dashed): nose shoulder, parachute, piston, motor mount, rings -->
+              <rect class="hid" x="285.75" y="-35" width="95.25" height="70"/>
+              <rect class="hid" x="449" y="-30" width="150" height="60" rx="20"/>
+              <rect class="hid" x="677" y="-35" width="60" height="70"/>
+              <line class="bulk" x1="679" y1="-35" x2="679" y2="35"/>
+              <rect class="hid" x="889.75" y="-16.1" width="260" height="32.2"/>
+              <line class="hid" x1="904" y1="-35" x2="904" y2="-16.1"/>
+              <line class="hid" x1="904" y1="16.1" x2="904" y2="35"/>
+              <line class="hid" x1="1137" y1="-35" x2="1137" y2="-16.1"/>
+              <line class="hid" x1="1137" y1="16.1" x2="1137" y2="35"/>
 
               <use href="#helios-outline" class="trace"/>
 
               <!-- CG and CP (mm from nose tip) -->
-              <line class="dim" x1="566" y1="13" x2="566" y2="76"/>
-              <line class="dim" x1="817.5" y1="13" x2="817.5" y2="76"/>
-              <circle class="mk" cx="566" cy="0" r="13"/>
-              <path class="mk-f" d="M566 0 L566 -13 A13 13 0 0 1 579 0 Z M566 0 L566 13 A13 13 0 0 1 553 0 Z"/>
-              <circle class="mk" cx="817.5" cy="0" r="13"/>
-              <circle class="mk-f" cx="817.5" cy="0" r="4"/>
-              <text class="lbl" x="566" y="100" text-anchor="middle">CG</text>
-              <text class="lbl" x="817.5" y="100" text-anchor="middle">CP</text>
+              <line class="dim" x1="775.3" y1="13" x2="775.3" y2="66"/>
+              <line class="dim" x1="911.3" y1="13" x2="911.3" y2="66"/>
+              <circle class="mk" cx="775.3" cy="0" r="13"/>
+              <path class="mk-f" d="M775.3 0 L775.3 -13 A13 13 0 0 1 788.3 0 Z M775.3 0 L775.3 13 A13 13 0 0 1 762.3 0 Z"/>
+              <circle class="mk" cx="911.3" cy="0" r="13"/>
+              <circle class="mk-f" cx="911.3" cy="0" r="4"/>
+              <text class="lbl" x="775.3" y="90" text-anchor="middle">CG</text>
+              <text class="lbl" x="911.3" y="90" text-anchor="middle">CP</text>
             </svg>
           </div>
         </figure>
@@ -141,7 +143,9 @@
             <h2>Alpha</h2>
             <p>A small rocket, 43 centimetres long and 2.6 centimetres in diameter, with four fins and a class C motor.</p>
           </div>
-          <span class="chip">C motor</span>
+          <div class="rocket-side">
+            <span class="chip">C motor</span>
+          </div>
         </div>
         <figure class="plan">
           <div class="plan-scroll">

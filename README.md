@@ -10,6 +10,8 @@ Adreça: https://hyperionrockets.upc.edu (també funciona https://hyperionrocket
 | `index.html` | Portada: nom, logo, accessos i patrocinadors |
 | `qui-som.html` | Què és Hyperion i què volem fer. Més endavant, l'equip |
 | `coets.html` | Els nostres coets (Helios, Alpha...) |
+| `helios-3d.html` | Model 3D de l'Helios (també a `es/` i `en/`) |
+| `helios-3d.js`, `helios.glb` | Visor 3D i model de l'Helios |
 | `collabora.html` | Patrocini, com unir-se i dossier |
 | `contacte.html` | Correu, Instagram i on som |
 | `es/` | Les mateixes pàgines en castellà (`index`, `quienes-somos`, `cohetes`, `colabora`, `contacto`) |
@@ -33,6 +35,12 @@ Els fitxers tenen comentaris curts en anglès que indiquen cada part.
 ## Afegir un coet
 
 A `coets.html` (i `es/cohetes.html`, `en/rockets.html`) cada coet és un bloc `<article class="rocket-entry ...">`. Copia'n un i canvia el nom, el text i el dibuix. El dibuix és un SVG en mil·límetres des de la punta de l'ogiva: el CG i el CP es mouen canviant els valors `x`/`cx` del bloc `CG and CP`. Per a un dibuix nou, demaneu-lo a partir del fitxer d'OpenRocket.
+
+## Model 3D de l'Helios
+
+- El model és `helios.glb` (exportat de Blender, en mil·límetres). Per canviar-lo, puja un `.glb` nou amb el mateix nom. Les peces s'han de dir igual que ara (`Ojiva`, `Piston`, `Cos principal`, `Fin 1`..., `Portamotor`, `Anell...`) perquè la vista explosionada les reconegui.
+- Les xifres del panell i els noms de les peces són a cada `helios-3d.html`, en text normal.
+- El 3D usa three.js des d'internet: no funciona obrint el fitxer directament a l'ordinador, només a la web.
 
 ## Formulari i dossier
 

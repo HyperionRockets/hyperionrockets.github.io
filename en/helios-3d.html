@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Helios in 3D · Hyperion Rockets</title>
+<meta name="description" content="Interactive 3D model of Helios, Hyperion Rockets' first high-power rocket.">
+<link rel="icon" href="../logo.webp" type="image/webp">
+<link rel="alternate" hreflang="ca" href="https://hyperionrockets.upc.edu/helios-3d.html">
+<link rel="alternate" hreflang="es" href="https://hyperionrockets.upc.edu/es/helios-3d.html">
+<link rel="alternate" hreflang="en" href="https://hyperionrockets.upc.edu/en/helios-3d.html">
+
+<!-- link preview (WhatsApp, Instagram...). Change the address here if the domain changes -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Hyperion Rockets">
+<meta property="og:title" content="Helios in 3D · Hyperion Rockets">
+<meta property="og:description" content="Interactive 3D model of Helios, Hyperion Rockets' first high-power rocket.">
+<meta property="og:image" content="https://hyperionrockets.upc.edu/og-image-en.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://hyperionrockets.upc.edu/en/helios-3d.html">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Martian+Mono:wght@400;500&family=Public+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../styles.css">
+<!-- visit counter (GoatCounter). Full https:// address: a bare "//" breaks local file:// testing -->
+<script data-goatcounter="https://hyperionrockets.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</head>
+<body class="is-viewer">
+
+<!-- background + scroll bar -->
+<canvas class="sky" aria-hidden="true"></canvas>
+<div class="progress" aria-hidden="true"></div>
+
+<!-- header -->
+<header class="top">
+  <div class="wrap top-in">
+    <a class="brand" href="index.html" aria-label="Hyperion Rockets, home">
+      <img src="../logo.webp" alt="" width="34" height="40">
+      <span>Hyperion Rockets</span>
+    </a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu"><span class="bars" aria-hidden="true"></span>Menu</button>
+    <div class="menu" id="menu">
+      <nav class="nav" aria-label="Pages">
+        <a href="about.html">About us</a>
+        <a href="rockets.html" aria-current="page">Rockets</a>
+        <a href="get-involved.html">Get involved</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="lang" role="group" aria-label="Language">
+        <a href="../helios-3d.html" hreflang="ca" lang="ca">CA</a>
+        <a href="../es/helios-3d.html" hreflang="es" lang="es">ES</a>
+        <a href="../en/helios-3d.html" hreflang="en" lang="en" aria-current="true">EN</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="viewer">
+  <!-- 3D stage: helios-3d.js draws the model here -->
+  <div id="stage" role="img" aria-label="3D model of Helios. Drag to rotate it and use the scroll wheel or pinch to zoom."></div>
+  <p id="loading" class="v-status">Loading the model<span id="pct"></span></p>
+  <div id="nogl" class="v-status" hidden>
+    <p>Your browser cannot show 3D models.</p>
+    <a class="btn ghost" href="rockets.html#helios">All rockets <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+  </div>
+
+  <section class="v-panel" aria-label="Helios">
+    <a class="v-back" href="rockets.html#helios"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M14 8H3M7 4 3 8l4 4"/></svg>All rockets</a>
+    <h1>Helios</h1>
+    <p class="v-sub">High-power rocket, 3 inch</p>
+    <dl class="v-specs">
+          <div><dt>Length</dt><dd>1,150 <small>mm</small></dd></div>
+          <div><dt>Diameter</dt><dd>78.7 <small>mm</small></dd></div>
+          <div><dt>Simulated apogee</dt><dd>705 <small>m</small></dd></div>
+          <div><dt>Top speed</dt><dd>168 <small>m/s</small></dd></div>
+          <div><dt>Motor</dt><dd>H182R <small>29 mm</small></dd></div>
+          <div><dt>Parachute</dt><dd>1.25 <small>m</small></dd></div>
+    </dl>
+    <div class="v-ctrl">
+      <label for="explode">Exploded view <output id="explodeOut">0 %</output></label>
+      <input id="explode" type="range" min="0" max="100" value="0" step="1">
+      <div class="v-row">
+        <button id="spin" type="button" aria-pressed="true">Auto-rotate</button>
+        <button id="labels" type="button" aria-pressed="true">Part names</button>
+      </div>
+    </div>
+    <p class="v-note">Current design. Flight figures simulated in OpenRocket with an AeroTech H182R motor.</p>
+  </section>
+  <p class="v-hint">Drag to rotate · scroll to zoom</p>
+</main>
+
+<!-- three.js from a CDN. To update, change the version in both lines -->
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
+} }
+</script>
+<script>var H3D = {"loading": "Loading the model", "error": "The 3D model could not be loaded.", "parts": {"nose": "3D-printed PETG nose cone", "piston": "Separation piston", "body": "3\" kraft paper body tube", "mmt": "29 mm motor mount with rings", "fins": "Birch plywood fins"}};</script>
+<script type="module" src="../helios-3d.js"></script>
+
+<script src="../site.js"></script>
+</body>
+</html>
