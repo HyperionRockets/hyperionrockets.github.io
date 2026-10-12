@@ -73,6 +73,12 @@ A `qui-som.html` (i `es/quienes-somos.html`, `en/about.html`) hi ha un comentari
 
 GoatCounter, gratuït. Crea el compte a https://www.goatcounter.com amb el codi `hyperionrockets` i les visites es veuen a https://hyperionrockets.goatcounter.com. Si el codi és un altre, canvia'l a totes les pàgines.
 
+## Cercadors (Google)
+
+- `sitemap.xml` i `robots.txt` diuen als cercadors quines pàgines hi ha. Els genera l'script; si afegiu una pàgina, cal afegir-la al `sitemap.xml`.
+- La web està donada d'alta a Google Search Console. Allà es veu si Google ha indexat les pàgines i es pot demanar que les torni a llegir.
+- No esborreu el fitxer `google....html` de verificació: Google el comprova de tant en tant.
+
 ## Domini
 
 La web s'allotja a GitHub Pages i es mostra a `hyperionrockets.upc.edu` gràcies a un registre CNAME de la UPC. El fitxer `CNAME` del repositori guarda aquest domini: no l'esborreu.
