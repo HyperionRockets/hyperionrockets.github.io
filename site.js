@@ -5,7 +5,7 @@
    dossier:    Catalan PDF. Empty = button shows "Disponible aviat".
    dossier_es / dossier_en: Spanish and English PDFs. Empty = those pages use the Catalan one. */
 var ENLLACOS = {
-  formulari: "",
+  formulari: "https://docs.google.com/forms/d/e/1FAIpQLSfSJBWsR8HwL88LcHbIDEgGM7JSjdwDpNY3L9lyifvdc_o33g/viewform",
   dossier: "dossier.pdf",
   dossier_es: "dossier-es.pdf",
   dossier_en: "dossier-en.pdf"
